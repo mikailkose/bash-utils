@@ -13,8 +13,12 @@ alias l.="ls -ld .*"
 # long listing
 alias ll="ls -la"
 
+# rm aliases
+# delete every file if not single
+alias rmsingle="md5sum $(find . -name *.txt -print) | awk '{c[$1]++;if(c[$1]==1){cache[$1]=$2} if(c[$1]>1){t[i++]=$2;if(cache[$1]!=""){t[i++]=cache[$1];delete cache[$1]}}} END{ for (var in t) {print t[var];} }' | sed 's/^*//' | xargs rm -f
+
 ## Functions
-findspobject() {
+spgrep() {
 if [ "$1" == "--help" ]
 then
     echo "Usage: <object name> <mtime>"
