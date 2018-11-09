@@ -17,6 +17,9 @@ alias ll="ls -la"
 # delete every file if not single
 alias rmsingle="md5sum $(find . -name *.txt -print) | awk '{c[$1]++;if(c[$1]==1){cache[$1]=$2} if(c[$1]>1){t[i++]=$2;if(cache[$1]!=""){t[i++]=cache[$1];delete cache[$1]}}} END{ for (var in t) {print t[var];} }' | sed 's/^*//' | xargs rm -f
 
+# rm not containing
+alias rm="diff -rq prod/ nori/ | grep -E "^Only in nori*" | sed -n 's/://p' | awk '{print $3"/"$4}' | xargs rm -f"
+
 ## Functions
 spgrep() {
 if [ "$1" == "--help" ]
